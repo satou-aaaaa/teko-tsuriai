@@ -216,6 +216,7 @@ try {
   n1 = await curT(page);
   { const off = 3 - Math.max(1, 3 - hn);
     check("つりあうと手をはなせ、ヒントを使った数だけ★が減る・棒は水平・式（重さ×きょり）が出る", n1.done && (await page.locator(".verdict .stars .off").textContent()).length === off && (await tilt()).includes("つりあっている") && /左：.*×.*＝/.test(await page.textContent(".verdict .calc")) && (await page.locator(".verdict .tip").count()) === 1); }
+  check("つりあったあとの「読む」は、問題文だけでなく星の数・式・説明も読む（2026-11-06 CodeRabbit）", await page.evaluate(() => { const t = [...document.querySelectorAll(".verdict [data-a11y-say]")].map((e) => e.getAttribute("aria-label") || e.innerText).join("。"); return /星\dつ/.test(t) && /左：/.test(t) && t.length > 30; }));
   await page.click("#next");
   // 別のタブで先に進んでいたら、古い画面の答えは足さない
   await page.evaluate((k) => { const s = JSON.parse(localStorage.getItem(k)); s.runs.d.res.push({ m: 0, h: 0 }); localStorage.setItem(k, JSON.stringify(s)); }, KEY);

@@ -627,10 +627,10 @@ function deliver() {
   const st = starsOf(rec), r = s.runs[MODE], fin = r && r.res.length >= r.list.length;
   const tip = lr.lever ? "軽いおもりでも、支点から遠くにつるせば、重いおもりとつりあいます（重さ×きょりが同じ）。" : lr.sum ? "いくつもつるしたときは、それぞれの「重さ×きょり」をたした数でくらべます。" : "左と右で「重さ×きょり」が同じになると、てこは水平につりあいます。";
   $("after").innerHTML = `<div class="verdict" role="status">
-    <div class="hd">つりあった！ ${starStr(st)}</div>
-    <p class="calc">左：${expr(tm.L)}<br>右：${expr(tm.R)}</p>
+    <div class="hd" data-a11y-say aria-label="つりあった！ 星${st}つ">つりあった！ ${starStr(st)}</div>
+    <p class="calc" data-a11y-say>左：${expr(tm.L)}<br>右：${expr(tm.R)}</p>
     <p class="note">${rec.m <= 0 ? `いちばん少ないおもり${p.d}こでつりあわせました。` : `おもり${nW()}こでつりあわせました（いちばん少ないと${p.d}こ）。`}${rec.h ? `ヒント${rec.h}回。` : ""}</p>
-    <p class="note tip">${tip}</p>
+    <p class="note tip" data-a11y-say>${tip}</p>
     <button class="main" id="next">${fin ? "結果を見る" : "次のてこへ"}</button></div>`;
   $("next").onclick = play;
   const me = cur;
