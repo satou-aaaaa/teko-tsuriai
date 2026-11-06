@@ -31,7 +31,7 @@ node qa/run.mjs   # てこのきまり（重さ×きょりの見本、別に書�
 - 押せる所は高さ44px以上、フックのボタンは幅320pxの上級（うで6目盛り）でも幅40px以上、てこの字は9px以上（うでは6目盛りまで。QA が見る）。おもりは色だけでなく「20g」の字と大きさで、はじめからのおもりとヒントは点線で分ける（色だけで分けない）。かたむきは読み上げの文（左が下がっている など）でも知らせる。機能を足す・直すたびに `qa/run.mjs` に検査を足す。乱数で組む部分は何百回も作って確かめる（shared-workflows `incidents/2026-10-31-roppo-empty-village.md`）。
 - 引き継ぎコード `transfer.js`・`qa/transfer-check.mjs`、見やすさの設定（`<!-- a11y:begin -->`〜`<!-- a11y:end -->`）・`qa/a11y.mjs` は shared-workflows template の写し（ここでは直さず、ひな形を直して写し直す。版は `引き継ぎの版:` と `a11y:begin` の行）。問題文・残りの数には `data-a11y-say`、知らせは `role="status"`／`aria-live`。
 - PWA（`manifest.webmanifest`・`sw.js`・`icon-*.png`）：画面のファイルを足したら `sw.js` の `SHELL` にも足し、中身を大きく変えたら `CACHE` の版を上げる。アイコンは `node tools/make-icons.cjs`、SNS 用の絵 `og.png` は `node tools/make-og.cjs`（今日の問題を入れない）。
-- 公開リポジトリなので、個人情報・鍵を入れない。
+- 公開リポジトリなので、個人情報・鍵を入れない。記録の名前（`KEY = "teko-tsuriai-v1"`・`data-keys=`）は鍵ではないが gitleaks がまちがえるので、その行に `gitleaks:allow` のコメントを付ける（QA が見る。前のコミットの分は `.gitleaksignore`）。
 
 ## 公開
 

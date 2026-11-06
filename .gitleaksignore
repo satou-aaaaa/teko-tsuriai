@@ -1,0 +1,4 @@
+# 記録の名前（localStorage のキー teko-tsuriai-v1）を gitleaks が鍵とまちがえた行。鍵ではない（2026-11-06）。これからの行は gitleaks:allow のコメントを付ける。
+af62f1bd6cd6be1a5fc6d016b258dc2a99e8715a:index.html:generic-api-key:127
+af62f1bd6cd6be1a5fc6d016b258dc2a99e8715a:index.html:generic-api-key:294
+af62f1bd6cd6be1a5fc6d016b258dc2a99e8715a:qa/run.mjs:generic-api-key:142

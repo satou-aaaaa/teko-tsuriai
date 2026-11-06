@@ -85,6 +85,10 @@ check("別のタブで先に進んだ（同じ回数の）つるし方を、古�
   const docs = ["README.md", "AGENTS.md", "manifest.webmanifest", "sw.js", "index.html"].map((f) => [f, readFileSync(path.join(root, f), "utf8")]);
   const left = docs.filter(([, t]) => /でんき回路|denki|導線|豆電球|回路帳|あみだ|amida|配達|しりとり|shiritori|ことばならべ|kotoba|words\.js|言葉帳|github\.io\/(?!teko-tsuriai\/)[a-z0-9-]+\//.test(t)).map(([f]) => f);
   check("README・AGENTS.md・manifest・sw.js・画面はこのゲームの名前と URL だけ（写し元のゲームが残らない）", left.length === 0 && /^# てこのつりあい/.test(docs[0][1]) && /satou-aaaaa\.github\.io\/teko-tsuriai\//.test(docs[0][1]), left.join(",")); }
+{ // 記録の名前（localStorage のキー）は gitleaks が鍵とまちがえる。その行には gitleaks:allow を付ける（2026-11-06 Secret scan が止まった。共通部品の見やすさの設定は除く）
+  const own = [["index.html", htmlOwn], ["qa/run.mjs", readFileSync(path.join(root, "qa/run.mjs"), "utf8")]];
+  const miss = own.flatMap(([f, t]) => t.split("\n").map((l, i) => [f, i + 1, l]).filter(([, , l]) => /(?:\bKEY = |data-keys=)"[a-z0-9-]+-v\d+"/.test(l) && !/gitleaks:allow/.test(l)).map(([f, n]) => `${f}:${n}`));
+  check("記録の名前を書いた行には gitleaks:allow がある（Secret scan が鍵とまちがえない）", miss.length === 0, miss.join(",")); }
 const ext = [...html.matchAll(/(?:src|href)="(https?:[^"]+)"/g)].map((m) => m[1]).filter((u) => !/^https:\/\/fonts\.googleapis\.com(\/|$)|^https:\/\/ko-fi\.com\/satouaaaaa$/.test(u));
 check("外から読むのは文字（Google Fonts）だけ。スクリプト・広告・解析を入れない", ext.length === 0, ext.join(","));
 check("CSP で通信先を自分だけにしている", /connect-src 'self'/.test(html) && !/connect-src[^;"]*https/.test(html));
@@ -139,7 +143,7 @@ async function solveNow(page) {
   for (let j = 0; j < 2 * p.A; j++) if (s.put[j] && !fixed[j]) await tapHook(page, j, s.put[j]);
   await page.click("#answer");
 }
-const KEY = "teko-tsuriai-v1";
+const KEY = "teko-tsuriai-v1"; // gitleaks:allow 記録の名前（鍵ではない）
 try {
   browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {});
   const page = await newPage();

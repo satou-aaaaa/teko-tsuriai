@@ -124,7 +124,7 @@ footer a{color:var(--ink2);min-height:44px;display:inline-flex;align-items:cente
 [hidden]{display:none!important}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
-<script src="transfer.js" data-game="teko-tsuriai" data-keys="teko-tsuriai-v1"></script>
+<script src="transfer.js" data-game="teko-tsuriai" data-keys="teko-tsuriai-v1"></script><!-- gitleaks:allow 記録の名前（鍵ではない） -->
 <!-- a11y:begin 見やすさの設定 v4（shared-workflows template/a11y/a11y.html の写し。ここでは直さず、ひな形を直して全部のゲームへ写す。drift-check と qa/a11y.mjs が同じ中身か見る） -->
 <style id="a11y-css">
 /* だれでも：キーボードで選んだ所に太い枠（WCAG 2.4.7・2.4.13） */
@@ -291,7 +291,7 @@ html.a11y-say body{padding-bottom:calc(64px + env(safe-area-inset-bottom,0px))!i
 const $ = (id) => document.getElementById(id), app = $("app");
 const SITE = "https://satou-aaaaa.github.io/teko-tsuriai/";
 const FEEDBACK = "https://github.com/satou-aaaaa/teko-tsuriai/issues/new?template=feedback.yml";
-const KEY = "teko-tsuriai-v1", EPOCH = "2026-11-06";
+const KEY = "teko-tsuriai-v1", EPOCH = "2026-11-06"; // gitleaks:allow 記録の名前（鍵ではない）
 const T = window.TKO, LVS = [...T.SIZES, T.HARD];
 
 // ---- 日付と種（日本時間。だれでも同じ3問）----
